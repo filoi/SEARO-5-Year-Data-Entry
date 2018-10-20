@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="col-sm-8 col-md-28">
+        <table class="table-borderless ">
+            <tr>
+                <td ng-style width="30%">{{'orgUnitLabel' | translate}}</td>
+                <td ng-style width="30%" colspan="4">
+                    <input type="text" class="form-control" value="{{selectedOrgUnit.name|| 'please_select_org'| translate}}"
+                        ng-disabled="true">
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    {{'datasets'| translate}}
+                </td>
+
+                <td colspan="4">
+
+                    <select ng-model="selectedDataset" class="form-control" ng-options="dataSet as dataSet.name for dataSet in selectedOrgUnit.dataSets | orderBy: 'name'"
+                        ng-disabled="selectedOrgUnit.dataSets.length < 1" ng-change="dummy(selectedDataset)">
+                        <option value="">{{selectedOrgUnit.dataSet.length > 0 ? 'please_select_dataset' :
+                            'no_dataset_exists'| translate}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td ng-style width="20%" colspan="1">
+                    {{'period'| translate}}
+                </td>
+                <td>
+
+                    <select ng-model="selectedPeriod" class="form-control" ng-options="period for period in selecteddatasetperiod1"
+                        ng-disabled="selectedOrgUnit.dataSets.length < 1" ng-change="sections(selectedPeriod)">
+                        <option value="">{{selecteddatasetperiod1.length > 0 ? 'please_select_period' :
+                            'no_period_exists'| translate}}</option>
+                    </select>
+
+
+
+                </td>
+
+
+                <td ng-style width="15%">
+
+                    <button type="button" class="btn btn-primary" ng-click="prevyear()" ng-disabled="selectedOrgUnit.dataSets.length < 1">{{'Prev-Year'|
+                        translate}}</button>
+
+                </td>
+
+
+                <td ng-style width="15%">
+
+                    <button type="button" class="btn btn-primary" ng-click="nextyear()" ng-disabled="selectedOrgUnit.dataSets.length < 1">{{'Next-Year'|
+                        translate}}</button>
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    {{'Source'| translate}}
+                </td>
+                <td colspan="4">
+
+                    <select ng-model="selectedSource" class="form-control" ng-options="option.name for option in optionset.categoryOptionCombos | orderBy: 'name'"
+                        ng-disabled="selectedOrgUnit.dataSets.length < 1" ng-change="generateForm(selectedDataset,selectedPeriod,selectedSource)">
+                        <option value="">{{optionset.length > 0 ? 'please_select_Source' : 'no_source_exists'|
+                            translate}}</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    {{'Section'| translate}}
+                </td>
+                <td colspan="4">
+                    <select ng-model="selectedSection" class="form-control" ng-options="sections.name for sections in sectionoption.sections"
+                        ng-change="get(selectedSection) ">
+                        <option value="">{{optionset.length > 0 ? 'please_select_Source' : 'no_source_exists'|
+                            translate}}</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+
+        <!-- Genrate form On change of section  -->
+        <table border="2" ng-style="{'visibility': selecteddataelement1.length > 0  ? 'visible' : 'hidden'}" class="table table-striped">
+            <tr>
+                <th></th>
+                <th>Data Elements</th>
+                <th ng-repeat="dataElements in selecteddatasetperiod | orderBy:'$index':true | limitTo:5">
+                    {{dataElements}}</th>
+            </tr>
+            <tr ng-repeat="dataElements1 in selecteddataelement1  track by $index">
+                <td>{{$index+1}}. </td>
+                <td ng-repeat="dataElements in dataElements1 |limitTo:1  " ng-style="{ 'width' :'300px'  ,'white-space': 'nowrap'}"
+                    class="alt"> {{dataElements.name}} </td>
+
+                <td ng-repeat="dataElements in dataElements1  track by $index" class="well" bootstrap-tooltip
+                    data-placement="bottom" title={{dataElements.value}}><input type="textarea" ng-model="example" id={{dataElements.TD}}
+                        ng-click=setoldvalue(dataElements.value) ng-blur="change1(example,dataElements.id,dataElements.name,dataElements.cc,dataElements.period,selectedSource,dataElements.TD)"
+                        value={{dataElements.value}}></td>
+            </tr>
+        </table>
+
+         <!-- End Genrate form On change of section  -->
+
+    </div>
+
+</div>

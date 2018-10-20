@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="https://cdn.rawgit.com/lodash/lodash/3.0.1/lodash.min.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Kit: ng 1.2, jQ 2.1, lo 3">
+    <title>Angular Directive for Bootstrap Tooltip</title>
+
+</head>
+<body>
+
+<h5>3 means Angular is working:  <em>{{1+2}}</em></h5>
+<hr>
+
+<div class="well" bootstrap-tooltip title="Tooltip on outer well">
+    <p >hover this outer well and see one tooltip</p>
+    <p class="well" bootstrap-tooltip data-placement="bottom" title="Tooltip on inner well">hover this inner well for another <span class="label label-info" bootstrap-tooltip data-placement="left" title="Tooltip placed left on span label">and another</span></p>
+</div>
+</body>
+</html>
